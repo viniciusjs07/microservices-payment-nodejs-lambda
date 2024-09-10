@@ -6,6 +6,7 @@ For detailed instructions, please refer to the [documentation](https://www.serve
 
 ## Description
 - In the path [/product-service] project it contains a nodejs application with typescript related to the product crud service using aws lambda function as code.
+- In the path [/notification-service] project it contains a nodejs application with typescript related to notification service using aws lambda function as code.
  
 
 ## Installation/deployment instructions
@@ -66,54 +67,54 @@ The project code base is mainly located within the `src` folder. This folder is 
 
 ```
 .
-    ├── src
-    │   ├── application
-    │   │   ├── dtos
-    │   │   │   ├── create-product.dto.ts
-    │   │   │   ├── get-product.dto.ts
-    │   │   │   ├── list-product.dto.ts
-    │   │   │   └── update-product.dto.ts
-    │   │   └── usecases
-    │   │       └── product
-    │   │           ├── create-product.usecase.ts
-    │   │           ├── delete-product.usecase.ts
-    │   │           ├── get-product.usecase.ts
-    │   │           ├── list-product.usecase.ts
-    │   │           └── update-product.usecase.ts
-    │   ├── domain
-    │   │   ├── entities
-    │   │   │   └── Product.ts
-    │   │   └── repositories
-    │   │       └── product
-    │   │           └── product.repository.contract.ts
-    │   ├── infra
-    │   │   ├── database
-    │   │   │   └── dynamodb
-    │   │   │       └── product.dynamo.repository.ts
-    │   │   └── facade
-    │   │       └── product-repository.facade.ts
-    │   ├── functions               # Lambda configuration and source code folder
-    │   │   ├── hello
-    │   │   │   ├── handler.ts      # `Hello` lambda source code
-    │   │   │   ├── index.ts        # `Hello` lambda Serverless configuration
-    │   │   │   ├── mock.json       # `Hello` lambda input parameter, if any, for local invocation
-    │   │   │   └── schema.ts       # `Hello` lambda input event JSON-Schema
-    │   │   └── index.ts            # Import/export of all lambda configurations
-    │   ├── lambdas
-    │   │   ├── create-product.ts
-    │   │   ├── delete-product.ts
-    │   │   ├── get-product.ts
-    │   │   ├── list-product.ts
-    │   │   └── update-product.ts
-    │   └── libs                    # Lambda shared code
-    │       └── apiGateway.ts       # API Gateway specific helpers
-    │       └── handlerResolver.ts  # Sharable library for resolving lambda handlers
-    │       └── lambda.ts           # Lambda middleware
-    ├── package.json
-    ├── serverless.ts               # Serverless service file
-    ├── tsconfig.json               # Typescript compiler configuration
-    ├── tsconfig.paths.json         # Typescript paths
-    └── webpack.config.js           # Webpack configuration
+product-service ├── src
+                │   ├── application
+                │   │   ├── dtos
+                │   │   │   ├── create-product.dto.ts
+                │   │   │   ├── get-product.dto.ts
+                │   │   │   ├── list-product.dto.ts
+                │   │   │   └── update-product.dto.ts
+                │   │   └── usecases
+                │   │       └── product
+                │   │           ├── create-product.usecase.ts
+                │   │           ├── delete-product.usecase.ts
+                │   │           ├── get-product.usecase.ts
+                │   │           ├── list-product.usecase.ts
+                │   │           └── update-product.usecase.ts
+                │   ├── domain
+                │   │   ├── entities
+                │   │   │   └── Product.ts
+                │   │   └── repositories
+                │   │       └── product
+                │   │           └── product.repository.contract.ts
+                │   ├── infra
+                │   │   ├── database
+                │   │   │   └── dynamodb
+                │   │   │       └── product.dynamo.repository.ts
+                │   │   └── facade
+                │   │       └── product-repository.facade.ts
+                │   ├── functions               # Lambda configuration and source code folder
+                │   │   ├── hello
+                │   │   │   ├── handler.ts      # `Hello` lambda source code
+                │   │   │   ├── index.ts        # `Hello` lambda Serverless configuration
+                │   │   │   ├── mock.json       # `Hello` lambda input parameter, if any, for local invocation
+                │   │   │   └── schema.ts       # `Hello` lambda input event JSON-Schema
+                │   │   └── index.ts            # Import/export of all lambda configurations
+                │   ├── lambdas
+                │   │   ├── create-product.ts
+                │   │   ├── delete-product.ts
+                │   │   ├── get-product.ts
+                │   │   ├── list-product.ts
+                │   │   └── update-product.ts
+                │   └── libs                    # Lambda shared code
+                │       └── apiGateway.ts       # API Gateway specific helpers
+                │       └── handlerResolver.ts  # Sharable library for resolving lambda handlers
+                │       └── lambda.ts           # Lambda middleware
+                ├── package.json
+                ├── serverless.ts               # Serverless service file
+                ├── tsconfig.json               # Typescript compiler configuration
+                ├── tsconfig.paths.json         # Typescript paths
+                └── webpack.config.js           # Webpack configuration
 
 ```
 
