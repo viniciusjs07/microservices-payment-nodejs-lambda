@@ -1,0 +1,89 @@
+# serverless.yml
+app: product-service
+service: product-service
+stages:
+  dev:
+    params:
+      tableName: "products"
+provider:
+  name: aws
+  runtime: nodejs20.x
+  memorySize: 1024
+  timeout: 10
+  lambdaHashingVersion: 20201221
+  environment:
+    TABLE_NAME: ${self:custom.tableName}
+  iam:
+    role:
+      statements:
+      - Effect: Allow
+        Action:
+          - dynamodb:Query
+          - dynamodb:Scan
+          - dynamodb:GetItem
+          - dynamodb:PutItem
+          - dynamodb:UpdateItem
+          - dynamodb:DeleteItem
+        Resource: "arn:aws:dynamodb:yourRegionAWS:yourAccountIdAWS:table/products"
+custom:
+  tableName: "products"
+  dynamodb:
+    - dev
+  start:
+    port: 8080
+    inMemory: true
+    migrate: true
+    seed: false
+
+resources:
+  Resources:
+    ProductsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+        TableName: ${self:custom.tableName}
+      
+functions:
+  createProduct:
+    handler: src/infra/lambdas/create-product.handler
+    events:
+      - http:
+          path: /products
+          method: post
+          integration: lambda-proxy
+  listProducts:
+    handler: src/infra/lambdas/list-products.handler
+    events:
+      - http:
+          path: /products
+          method: get
+          integration: lambda-proxy    
+  updateProduct:
+    handler: src/infra/lambdas/update-product.handler
+    events:
+      - http:
+          path: /products
+          method: put
+          integration: lambda-proxy    
+  getProduct:
+    handler: src/infra/lambdas/get-product.handler
+    events:
+      - http:
+          path: /product/{id}
+          method: get
+          integration: lambda-proxy    
+  deleteProduct:
+    handler: src/infra/lambdas/delete-product.handler
+    events:
+      - http:
+          path: /products/{id}
+          method: delete
+          integration: lambda-proxy    
+
+      
