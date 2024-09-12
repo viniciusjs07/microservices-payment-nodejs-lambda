@@ -1,7 +1,7 @@
 import { APIGatewayProxyHandler, APIGatewayProxyResult } from "aws-lambda";
-import { UpdateProductUseCase } from "../../application/usecases/product/update-product-usecase";
-import { Product } from "../../domain/entities/Product";
-import { InputUpdateProductDTO } from "../..//application/dtos/update-product.dto";
+import { UpdateProductUseCase } from "src/application/usecases/product/update-product-usecase";
+import { Product } from "src/domain/entities/Product";
+import { InputUpdateProductDTO } from "src/application/dtos/update-product.dto";
 import { ProductRepositoryFacade } from "../facade/repositories/product-respository.facade";
 
 const productRepository = ProductRepositoryFacade.getInstance();
@@ -25,14 +25,16 @@ export const handler: APIGatewayProxyHandler = async (
     }
 
     const product = new Product(
-      body.id,
       body.name,
       body.description,
       body.salePrice,
       body.quantity,
       body.costPrice,
-      body.deliveryPrice
+      body.deliveryPrice,
+      body.id
     );
+    console.log("DATA product BODYY:", body);
+    console.log("DATA product:", product);
 
     await updateProductUseCase.execute(product as InputUpdateProductDTO);
     return {

@@ -1,6 +1,9 @@
 # serverless.yml
 app: product-service
 service: product-service
+
+frameworkVersion: '3'
+
 stages:
   dev:
     params:
@@ -10,21 +13,20 @@ provider:
   runtime: nodejs20.x
   memorySize: 1024
   timeout: 10
-  lambdaHashingVersion: 20201221
   environment:
     TABLE_NAME: ${self:custom.tableName}
   iam:
     role:
       statements:
-      - Effect: Allow
-        Action:
-          - dynamodb:Query
-          - dynamodb:Scan
-          - dynamodb:GetItem
-          - dynamodb:PutItem
-          - dynamodb:UpdateItem
-          - dynamodb:DeleteItem
-        Resource: "arn:aws:dynamodb:yourRegionAWS:yourAccountIdAWS:table/products"
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource: "arn:aws:dynamodb:YourRegion:YourAccountId:table/products"
 custom:
   tableName: "products"
   dynamodb:
@@ -34,6 +36,9 @@ custom:
     inMemory: true
     migrate: true
     seed: false
+
+plugins:
+  - serverless-esbuild
 
 resources:
   Resources:
@@ -84,6 +89,4 @@ functions:
       - http:
           path: /products/{id}
           method: delete
-          integration: lambda-proxy    
-
-      
+          integration: lambda-proxy

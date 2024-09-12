@@ -1,4 +1,4 @@
-import { OutputProductDTO } from "../../../application/dtos/list-products.dto";
+import { OutputProductDTO } from "src/application/dtos/list-products.dto";
 
 export interface IListProductUseCaseContract {
   execute(): Promise<OutputProductDTO[]>;

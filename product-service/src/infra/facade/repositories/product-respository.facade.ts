@@ -1,5 +1,5 @@
-import { ProductDynamoRepository } from "../../../infra/database/dynamodb/product.dynamo.repository";
-import { IProductRepositoryContract } from "../../../domain/repositories/product/product.repository.contract";
+import { ProductDynamoRepository } from "src/infra/database/dynamodb/product.dynamo.repository";
+import { IProductRepositoryContract } from "src/domain/repositories/product/product.repository.contract";
 
 // Evita criar várias instâncias de ProductDynamoRepository dentro das lambdas.
 export class ProductRepositoryFacade {

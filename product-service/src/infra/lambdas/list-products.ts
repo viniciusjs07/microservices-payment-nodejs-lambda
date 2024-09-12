@@ -1,12 +1,11 @@
 import { APIGatewayProxyHandler, APIGatewayProxyResult } from "aws-lambda";
-import { ListProductsUseCase } from "../../application/usecases/product/list-product.usecase";
+import { ListProductsUseCase } from "src/application/usecases/product/list-product.usecase";
 import { ProductRepositoryFacade } from "../facade/repositories/product-respository.facade";
 
 const productRepository = ProductRepositoryFacade.getInstance();
 const listProductsUseCase = new ListProductsUseCase(productRepository);
 
 export const handler: APIGatewayProxyHandler = async (
-  event,
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {

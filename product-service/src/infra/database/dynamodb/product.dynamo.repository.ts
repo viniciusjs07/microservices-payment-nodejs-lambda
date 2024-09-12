@@ -2,14 +2,14 @@ import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import {
   PutCommand,
   PutCommandInput,
-  QueryCommandInput,
   UpdateCommand,
   UpdateCommandInput,
-  QueryCommand,
   GetCommand,
   GetCommandInput,
   DeleteCommandInput,
   DeleteCommand,
+  ScanCommandInput,
+  ScanCommand,
 } from "@aws-sdk/lib-dynamodb";
 import { Product } from "src/domain/entities/Product";
 import { IProductRepositoryContract } from "src/domain/repositories/product/product.repository.contract";
@@ -34,6 +34,10 @@ export class ProductDynamoRepository implements IProductRepositoryContract {
   }
 
   async update(product: Product): Promise<void> {
+    console.log("Updating product:", product);
+
+    console.log("Updating product with ID:", product.id);
+
     const params = {
       TableName: this.tableName,
       Key: {
@@ -41,7 +45,7 @@ export class ProductDynamoRepository implements IProductRepositoryContract {
       },
       UpdateExpression:
         "set #name = :name, #description = :description, #salePrice = :salePrice, #quantity = :quantity, #costPrice = :costPrice, #deliveryPrice = :deliveryPrice",
-      ExpressionAtributeNames: {
+      ExpressionAttributeNames: {
         "#name": "name",
         "#description": "description",
         "#salePrice": "salePrice",
@@ -49,7 +53,7 @@ export class ProductDynamoRepository implements IProductRepositoryContract {
         "#costPrice": "costPrice",
         "#deliveryPrice": "deliveryPrice",
       },
-      ExpressionAtributeValues: {
+      ExpressionAttributeValues: {
         ":name": product.name,
         ":description": product.description,
         ":salePrice": product.salePrice,
@@ -66,9 +70,9 @@ export class ProductDynamoRepository implements IProductRepositoryContract {
   async list(): Promise<Product[]> {
     const params = {
       TableName: this.tableName,
-    } as QueryCommandInput;
+    } as ScanCommandInput;
 
-    const command = new QueryCommand(params);
+    const command = new ScanCommand(params);
     const response = await this.client.send(command);
     return response.Items as Product[];
   }

@@ -1,7 +1,7 @@
 import { APIGatewayProxyHandler, APIGatewayProxyResult } from "aws-lambda";
-import { CreateProductUseCase } from "../../application/usecases/product/create-product.usecase";
-import { Product } from "../../domain/entities/Product";
 import { ProductRepositoryFacade } from "../facade/repositories/product-respository.facade";
+import { CreateProductUseCase } from "src/application/usecases/product/create-product.usecase";
+import { Product } from "src/domain/entities/Product";
 
 const productRepository = ProductRepositoryFacade.getInstance();
 
@@ -32,7 +32,6 @@ export const handler: APIGatewayProxyHandler = async (
       body.costPrice || 0,
       body.deliveryPrice || 0
     );
-
     await createProductUseCase.execute(product);
     return {
       statusCode: 201,
