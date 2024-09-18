@@ -1,0 +1,7 @@
+
+app: notification-service
+service: notification-service
+frameworkVersion: '3'
+
+provider:
+  name: aws

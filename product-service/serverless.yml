@@ -26,7 +26,7 @@ provider:
             - dynamodb:PutItem
             - dynamodb:UpdateItem
             - dynamodb:DeleteItem
-          Resource: "arn:aws:dynamodb:YourRegion:YourAccountId:table/products"
+          Resource: "arn:aws:dynamodb:us-east-1:622000977679:table/products"
 custom:
   tableName: "products"
   dynamodb:
