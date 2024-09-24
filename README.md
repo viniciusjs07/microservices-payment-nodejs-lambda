@@ -66,7 +66,50 @@ The project code base is mainly located within the `src` folder. This folder is 
 - `libs` - containing shared code base between your lambdas
 
 ```
-.
+
+notification-service ├── src
+                │    ├── application
+                │    │   ├── dtos
+                │    │   │   ├── email-notification.dto.ts
+                │    │   │   ├── purchase-approved.dto.ts
+                │    │   │   
+                │    │   │   
+                │    │   └── usecases
+                │    │         ├── purchase-approved.usecase.ts
+                │    │           
+                │    │          
+                │    │          
+                │    │          
+                │    │           
+                │    ├── domain
+                │    │   ├── service
+                │    │   │         ├── http
+                │    │   │         │     └── http.service.contract.ts
+                │    │   │         ├── notification
+                │    │   │                   └──email-notification.service.contract.ts
+                │    │   │   
+                │    │   └── usecases
+                │    │       └── email
+                │    │           └── purchase-approved.usecase.contract.ts
+                │    ├── infra
+                │    │   ├── lambdas
+                │    │   │   ├── send-email-notification.ts
+                │    │   │   │
+                │    │   │   │
+                │    │   │   │
+                │    │   │   │
+                │    │   │   ├── services 
+                │    │   │   │      ├── http
+                │    │   │   │      │     └── axios.service.ts
+                │    │   │   │      ├── notification
+                │    │   │   │                └──email-notification.service.ts                 
+                ├── package.json
+                ├── serverless.yml              # Serverless service file
+                ├── tsconfig.json               # Typescript compiler configuration
+                ├── tsconfig.paths.json         # Typescript paths
+                └── webpack.config.js           # Webpack configuration
+                └── env.example
+
 product-service ├── src
                 │   ├── application
                 │   │   ├── dtos
@@ -92,26 +135,19 @@ product-service ├── src
                 │   │   │   └── dynamodb
                 │   │   │       └── product.dynamo.repository.ts
                 │   │   └── facade
-                │   │       └── product-repository.facade.ts
-                │   ├── functions               # Lambda configuration and source code folder
-                │   │   ├── hello
-                │   │   │   ├── handler.ts      # `Hello` lambda source code
-                │   │   │   ├── index.ts        # `Hello` lambda Serverless configuration
-                │   │   │   ├── mock.json       # `Hello` lambda input parameter, if any, for local invocation
-                │   │   │   └── schema.ts       # `Hello` lambda input event JSON-Schema
-                │   │   └── index.ts            # Import/export of all lambda configurations
-                │   ├── lambdas
-                │   │   ├── create-product.ts
-                │   │   ├── delete-product.ts
-                │   │   ├── get-product.ts
-                │   │   ├── list-product.ts
-                │   │   └── update-product.ts
-                │   └── libs                    # Lambda shared code
-                │       └── apiGateway.ts       # API Gateway specific helpers
-                │       └── handlerResolver.ts  # Sharable library for resolving lambda handlers
-                │       └── lambda.ts           # Lambda middleware
+                │   │   │       └── product-repository.facade.ts
+                │   │   └── lambdas
+                │   │             └── create-product.ts
+                │   │             └── get-product.ts
+                │   │             └── list-product.ts
+                │   │             └── update-product.ts
+                │   │     
+                │   │ 
+                │   │     
+                │   │     
+                │   │     
                 ├── package.json
-                ├── serverless.ts               # Serverless service file
+                ├── serverless.yml              # Serverless service file
                 ├── tsconfig.json               # Typescript compiler configuration
                 ├── tsconfig.paths.json         # Typescript paths
                 └── webpack.config.js           # Webpack configuration
