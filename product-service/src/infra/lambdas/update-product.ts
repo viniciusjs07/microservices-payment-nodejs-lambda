@@ -33,9 +33,6 @@ export const handler: APIGatewayProxyHandler = async (
       body.deliveryPrice,
       body.id
     );
-    console.log("DATA product BODYY:", body);
-    console.log("DATA product:", product);
-
     await updateProductUseCase.execute(product as InputUpdateProductDTO);
     return {
       statusCode: 200,

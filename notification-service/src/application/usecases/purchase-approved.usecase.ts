@@ -11,15 +11,21 @@ export class PurchaseApprovedUseCase
   async execute(data: InputPurchaseApprovedDTO): Promise<void> {
     await this.emailService.send({
       to: data.email,
+      name: data.name,
       subject: "Compra aprovada!",
-      body: `Olá, ${data.name}. Sua compra foi aprovada!
-      <br/>
-      O total da sua compra é: R$ ${data.purchaseTotalAmount}!
-      <br/>
-      Data da compra: ${data.purchaseData}
-      <br/>
-      Meio de pagamento: ${data.paymentMethod}
-      <br/>
+      body: `
+      <html>
+        <body> 
+        <h2>Olá, ${data.name}. Sua compra foi aprovada!</h2>
+        <br/>
+        <p> O total da sua compra é: R$ ${data.purchaseTotalAmount}!</p>
+        <br/>
+        <p> Data da compra: ${data.purchaseData}</p>
+        <br/>
+       <p> Meio de pagamento: ${data.paymentMethod}</p>
+        <br/>
+      </body> 
+      </html>
       `,
     });
   }

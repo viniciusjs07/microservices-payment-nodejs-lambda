@@ -34,10 +34,6 @@ export class ProductDynamoRepository implements IProductRepositoryContract {
   }
 
   async update(product: Product): Promise<void> {
-    console.log("Updating product:", product);
-
-    console.log("Updating product with ID:", product.id);
-
     const params = {
       TableName: this.tableName,
       Key: {
